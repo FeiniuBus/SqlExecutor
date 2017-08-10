@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FeiniuBus.DynamicQuery\FeiniuBus.DynamicQuery.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.HashObject\FeiniuBus.HashObject.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.Mapper\FeiniuBus.Mapper.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.SqlBuilder\FeiniuBus.SqlBuilder.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.SqlExecutor.Mysql\FeiniuBus.SqlExecutor.Mysql.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.SqlExecutor\FeiniuBus.SqlExecutor.csproj" />
+  </ItemGroup>
+
+</Project>

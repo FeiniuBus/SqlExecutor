@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.SqlExecutor", "src\FeiniuBus.SqlExecutor\FeiniuBus.SqlExecutor.csproj", "{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F76093DA-EC55-42EB-88C1-3278738C6FD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.HashObject", "src\FeiniuBus.HashObject\FeiniuBus.HashObject.csproj", "{2F93185F-EE63-41D3-AF1F-B126AB7D3EC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{73CBEBAB-7DEC-4FEC-922D-519A82798609}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.Test", "test\FeiniuBus.Test\FeiniuBus.Test.csproj", "{FC560F44-6B2B-49A3-A08B-3D1DBC91F32D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.SqlExecutor.Mysql", "src\FeiniuBus.SqlExecutor.Mysql\FeiniuBus.SqlExecutor.Mysql.csproj", "{6DFAC943-F04D-423E-8C20-46197052BD3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.Mapper", "src\FeiniuBus.Mapper\FeiniuBus.Mapper.csproj", "{52378144-BC61-4827-93CC-5B11538E7987}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.SqlBuilder", "src\FeiniuBus.SqlBuilder\FeiniuBus.SqlBuilder.csproj", "{519FB662-6086-4257-9D7D-959BB00EF325}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.DynamicQuery", "src\FeiniuBus.DynamicQuery\FeiniuBus.DynamicQuery.csproj", "{085AD1BE-88C8-436A-BA28-67B23CF59BFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.ConsoleTest", "test\FeiniuBus.ConsoleTest\FeiniuBus.ConsoleTest.csproj", "{B3EAF6B5-9F35-4624-B84C-6C77801D605C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeiniuBus.LinqBuilder", "src\FeiniuBus.LinqBuilder\FeiniuBus.LinqBuilder.csproj", "{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F93185F-EE63-41D3-AF1F-B126AB7D3EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F93185F-EE63-41D3-AF1F-B126AB7D3EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F93185F-EE63-41D3-AF1F-B126AB7D3EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F93185F-EE63-41D3-AF1F-B126AB7D3EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC560F44-6B2B-49A3-A08B-3D1DBC91F32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC560F44-6B2B-49A3-A08B-3D1DBC91F32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC560F44-6B2B-49A3-A08B-3D1DBC91F32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC560F44-6B2B-49A3-A08B-3D1DBC91F32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DFAC943-F04D-423E-8C20-46197052BD3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DFAC943-F04D-423E-8C20-46197052BD3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DFAC943-F04D-423E-8C20-46197052BD3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DFAC943-F04D-423E-8C20-46197052BD3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52378144-BC61-4827-93CC-5B11538E7987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52378144-BC61-4827-93CC-5B11538E7987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52378144-BC61-4827-93CC-5B11538E7987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52378144-BC61-4827-93CC-5B11538E7987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{519FB662-6086-4257-9D7D-959BB00EF325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{519FB662-6086-4257-9D7D-959BB00EF325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{519FB662-6086-4257-9D7D-959BB00EF325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{519FB662-6086-4257-9D7D-959BB00EF325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085AD1BE-88C8-436A-BA28-67B23CF59BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085AD1BE-88C8-436A-BA28-67B23CF59BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085AD1BE-88C8-436A-BA28-67B23CF59BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085AD1BE-88C8-436A-BA28-67B23CF59BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3EAF6B5-9F35-4624-B84C-6C77801D605C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3EAF6B5-9F35-4624-B84C-6C77801D605C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3EAF6B5-9F35-4624-B84C-6C77801D605C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3EAF6B5-9F35-4624-B84C-6C77801D605C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{2F93185F-EE63-41D3-AF1F-B126AB7D3EC3} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{FC560F44-6B2B-49A3-A08B-3D1DBC91F32D} = {73CBEBAB-7DEC-4FEC-922D-519A82798609}
+		{6DFAC943-F04D-423E-8C20-46197052BD3E} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{52378144-BC61-4827-93CC-5B11538E7987} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{519FB662-6086-4257-9D7D-959BB00EF325} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{085AD1BE-88C8-436A-BA28-67B23CF59BFC} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{B3EAF6B5-9F35-4624-B84C-6C77801D605C} = {73CBEBAB-7DEC-4FEC-922D-519A82798609}
+		{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+	EndGlobalSection
+EndGlobal

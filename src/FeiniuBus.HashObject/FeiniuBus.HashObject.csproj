@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>FeiniuBus</RootNamespace>
+    <Description>feiniubus hashobject</Description>
+    <Copyright>© FeiniuBus Corporation. All rights reserved.</Copyright>
+  </PropertyGroup>
+
+</Project>
