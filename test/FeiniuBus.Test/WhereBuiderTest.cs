@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FeiniuBus.SqlBuilder;
+﻿using FeiniuBus.SqlBuilder;
 using FeiniuBus.SqlBuilder.Mysql;
 using Xunit;
 

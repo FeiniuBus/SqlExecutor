@@ -92,6 +92,17 @@ namespace FeiniuBus.SqlExecutor.Mysql
             _transaction = await _connection.BeginTransactionAsync();
         }
 
+        public async Task BeginTransactionAsync(IsolationLevel isolationLevel)
+        {
+            if (_transaction != null)
+            {
+                throw new Exception("已经开始了一个事物!");
+            }
+            _transaction = await _connection.BeginTransactionAsync(IsolationLevel.Chaos);
+        }
+
+
+
         public void CommitTransaction()
         {
             if (_transaction == null)

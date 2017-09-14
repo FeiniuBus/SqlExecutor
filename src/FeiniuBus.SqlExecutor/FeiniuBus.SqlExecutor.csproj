@@ -8,16 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FeiniuBus.HashObject\FeiniuBus.HashObject.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="System.ComponentModel">
-      <HintPath>C:\Users\feiniu-dyh\.nuget\packages\system.componentmodel\4.3.0\ref\netstandard1.0\System.ComponentModel.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 </Project>

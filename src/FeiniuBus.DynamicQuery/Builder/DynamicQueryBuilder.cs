@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace FeiniuBus.Builder
+namespace FeiniuBus
 {
     public class DynamicQueryBuilder
     {

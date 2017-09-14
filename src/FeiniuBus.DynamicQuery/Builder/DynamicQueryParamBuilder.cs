@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace FeiniuBus.Builder
+namespace FeiniuBus
 {
     public class DynamicQueryParamBuilder
     {

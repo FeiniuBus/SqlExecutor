@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
-namespace FeiniuBus
+namespace FeiniuBus.LinqBuilder
 {
-    public class DefaultCharacterConverter : ICharacterConverter
+    public static class DynamicQueryCharacterConverter
     {
-        public virtual DynamicQuery Converter(DynamicQuery dynamicQuery)
+        public static DynamicQuery Converter(DynamicQuery dynamicQuery)
         {
             if (dynamicQuery == null)
                 return null;
@@ -29,34 +28,21 @@ namespace FeiniuBus
             return result;
         }
 
-        public virtual DynamicQueryParamGroup ConverterDynamicQueryParamGroup(DynamicQueryParamGroup old)
+        public static List<DynamicQueryOrder> ConverterOrderFieldName(List<DynamicQueryOrder> orders)
         {
-            var res = new DynamicQueryParamGroup();
-            ConverterDynamicQueryParamGroupFieldName(res, old);
-            return res;
+            var result = new List<DynamicQueryOrder>();
+            if (orders != null)
+            {
+                foreach (var item in orders)
+                {
+                    result.Add(new DynamicQueryOrder() { Name = FieldConverter(item.Name), Sort = item.Sort });
+                }
+            }
+
+            return result;
         }
 
-        public virtual string FieldConverter(string fieldName)
-        {
-            if (string.IsNullOrEmpty(fieldName))
-                throw new ArgumentNullException(nameof(fieldName));
-            var res = string.Empty;
-            var arr = fieldName.Trim().Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            for (int i = 0; i < arr.Count; i++)
-            {
-                var lineArr = arr[i].Split('_');
-                foreach (var line in lineArr)
-                {
-                    if (line.Length > 1)
-                        res += line.Substring(0, 1).ToUpper() + line.Substring(1);
-                    else res += line.ToUpper();
-                }
-                if (i < arr.Count - 1)
-                    res += '.';
-            }
-            return res;
-        }
-        private void ConverterDynamicQueryParamGroupFieldName(DynamicQueryParamGroup newGroup, DynamicQueryParamGroup old)
+        public static void ConverterDynamicQueryParamGroupFieldName(DynamicQueryParamGroup newGroup, DynamicQueryParamGroup old)
         {
             if (newGroup == null)
                 throw new ArgumentNullException(nameof(newGroup));
@@ -87,33 +73,45 @@ namespace FeiniuBus
             }
             if (old.ChildGroups != null && old.ChildGroups.Any())
             {
-
+               
                 foreach (var childGroup in old.ChildGroups)
                 {
                     var newChildGroup = new DynamicQueryParamGroup();
                     ConverterDynamicQueryParamGroupFieldName(newChildGroup, childGroup);
                     newGroup.ChildGroups.Add(newChildGroup);
                 }
-
+               
             }
 
         }
-        private string ConverterSelectFieldName(string select)
+
+        public static string ConverterSelectFieldName(string select)
         {
             if (select == null) return null;
-            return string.Join(",", select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(FieldConverter));
+            return string.Join("", select.Split(',').Select(FieldConverter));
         }
-        private List<DynamicQueryOrder> ConverterOrderFieldName(List<DynamicQueryOrder> orders)
+
+        public static string FieldConverter(string fieldName)
         {
-            var result = new List<DynamicQueryOrder>();
-            if (orders != null)
+            var res = string.Empty;
+            if (string.IsNullOrWhiteSpace(fieldName))
+                return res;
+            var arr = fieldName.Trim().Split('.').Where(i => !string.IsNullOrWhiteSpace(i)).ToList();
+
+            for (int i = 0; i < arr.Count; i++)
             {
-                foreach (var item in orders)
+                var lineArr = arr[i].Split('_');
+                foreach (var line in lineArr)
                 {
-                    result.Add(new DynamicQueryOrder() { Name = FieldConverter(item.Name), Sort = item.Sort });
+                    if (line.Length > 1)
+                        res += line.Substring(0, 1).ToUpper() + line.Substring(1);
+                    else res += line.ToLower();
                 }
+                if (i < arr.Count - 1)
+                    res += '.';
             }
-            return result;
+
+            return res;
         }
     }
 }

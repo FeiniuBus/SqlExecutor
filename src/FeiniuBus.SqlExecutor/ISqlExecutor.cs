@@ -1,21 +1,17 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace FeiniuBus.SqlExecutor
 {
-    public interface ISqlExecutor : IDisposable
+    public interface ISqlExecutor : IReadOnlySqlExecutor
     {
         Task BeginTransactionAsync();
+        Task BeginTransactionAsync(IsolationLevel isolationLevel);
         void CommitTransaction();
         void RollbackTransaction();
 
-        Task<IHashObject> SingRowAsync(string sql, IHashObject parms);
-        Task<IHashObjectList> ListAsync(string sql, IHashObject parms);
-        Task<object> ExecuteScalar(string sql, IHashObject parms);
         Task<int> ExecuteNonQueryAsync(string sql, IHashObject param);
-
-
-
     }
 
 

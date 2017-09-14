@@ -1,4 +1,4 @@
-﻿namespace FeiniuBus.Builder
+﻿namespace FeiniuBus
 {
     public class DynamicQueryParamGroupBuilder
     {

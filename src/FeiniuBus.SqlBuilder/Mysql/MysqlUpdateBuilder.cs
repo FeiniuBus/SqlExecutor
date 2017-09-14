@@ -30,7 +30,6 @@ namespace FeiniuBus.SqlBuilder.Mysql
                 filedSb.AppendFormat("`{0}` = {1},", item.Key, pfield);
             }
             res.SqlString.AppendLine(filedSb.ToString().TrimEnd(','));
-
             res.SqlString.AppendLine($"WHERE 1=1");
 
             var whereRes = BuildWhere();

@@ -1,6 +1,4 @@
 ﻿using System;
-using FeiniuBus.Builder;
-
 namespace FeiniuBus.SqlBuilder.Mysql
 {
     public class MysqlWhereBuilder : SqlMapper, IWhereBuilder
