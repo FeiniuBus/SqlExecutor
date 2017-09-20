@@ -16,6 +16,6 @@ script:
   - dotnet build -c Release
   - cd $TEST_PATH
   - dotnet add ./$TEST_PROJECT package xunit.runner.console --version $XUNIT_RUNNER_VERSION
-  - dotnet restore ./$TEST_PROJECT -r $runtime -f $TEST_FRAMEWORK
+  - dotnet restore ./$TEST_PROJECT -r $runtime
   - dotnet build ./$TEST_PROJECT -c Release -f $TEST_FRAMEWORK
   - dotnet test ./$TEST_PROJECT
