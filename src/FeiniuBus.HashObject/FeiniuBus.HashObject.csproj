@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;netstandard2.0;</TargetFrameworks>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <RootNamespace>FeiniuBus</RootNamespace>
     <Description>feiniubus hashobject</Description>
     <Copyright>© FeiniuBus Corporation. All rights reserved.</Copyright>
