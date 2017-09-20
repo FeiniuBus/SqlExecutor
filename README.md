@@ -1,6 +1,5 @@
 # SqlExecutor
 FeiniuBus Database Operating Competents.Offering DynamicQuery, Object Mapper, Linq Builder, Sql Builder and others.
-
 # Pipeline
 [![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=master)](https://travis-ci.org/FeiniuBus/SqlExecutor)
 [![Build status](https://ci.appveyor.com/api/projects/status/w49ddl7ydevg4kl5?svg=true)](https://ci.appveyor.com/project/standardcore/sqlexecutor)
@@ -47,3 +46,4 @@ An encapsulation layer of Ado.NET.
 
 ## SqlExecuter.Mysql
 An MySQL dialect implemention of SqlExecuter.
+
