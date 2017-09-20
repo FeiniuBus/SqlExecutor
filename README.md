@@ -2,8 +2,10 @@
 FeiniuBus Database Operating Competents.Offering DynamicQuery, Object Mapper, Linq Builder, Sql Builder and others.
 
 # Pipeline
-[![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=master)](https://travis-ci.org/FeiniuBus/SqlExecutor)
-[![Build status](https://ci.appveyor.com/api/projects/status/w49ddl7ydevg4kl5?svg=true)](https://ci.appveyor.com/project/standardcore/sqlexecutor)
+Branch | Status | CI
+----|----|----
+master | PROTECTED | [![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=master)](https://travis-ci.org/FeiniuBus/SqlExecutor)[![Build status](https://ci.appveyor.com/api/projects/status/w49ddl7ydevg4kl5?svg=true)](https://ci.appveyor.com/project/standardcore/sqlexecutor)
+milestone/2.0.0 | OPENING | [![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=milestone/2.0.0)](https://travis-ci.org/FeiniuBus/SqlExecutor)
 
 # Competents
 ## Dynamic Query
@@ -47,3 +49,12 @@ An encapsulation layer of Ado.NET.
 
 ## SqlExecuter.Mysql
 An MySQL dialect implemention of SqlExecuter.
+
+# Support
+ Framework | Support 
+----|----
+ netstandard1.6 | +Support
+ netstandard2.0 | +Support
+ netcoreapp1.1 | +Support
+ netcoreapp2.0 | +Support
+ golang | +[Client Only](https://github.com/FeiniuBus/SqlExecutor-Go)
