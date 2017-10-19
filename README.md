@@ -49,7 +49,47 @@ HashObject,HashList
 DynamicQuery-LinqExpression Converter.
 
 ## SqlBuilder
-DynamicQuery-SQLStatement Converter.
+### STEP 1 : Add SqlBuilder Services in `StartUp.cs`
+
+```cs
+ public void ConfigureServices(IServiceCollection services)
+{
+   services.AddSQLBuilder(opts =>
+   {
+      opts.UseMySQL();
+   });
+}
+```
+
+### STEP 2 : Builder mapping data with fluent style api
+```cs
+var mappings = new SqlFieldMappings();
+mappings.Map("Guest", "t1.Guest")
+        .Map("Address", "t1.Address")
+        .Map("Disabled", "t1.Disabled")
+        .Map("Amout", "t1.Amout")
+        .Map("Price", "t1.Price")
+        .Map("Drink", "t1.Drink")
+        .Map("Count", "t1.Count")
+        .Map("Total", "t1.Total");
+// Native api also be supported
+mappings.Add("Url", "t1.Url");
+```
+
+### STEP 3 : Builder SQL clauses
+```cs
+// `selectBuilder` should be injected from DI. Notice it's lifetime and create service scope any time if	necessary.
+selectBuilder.Mapping(mappings);
+selectBuilder.Where(dynamicQuery.ParamGroup);
+var whereClause = selectBuilder.BuildWhere();
+var orderbyClause = selectBuilder.OrderBy(dynamicQuery.Order);
+```
+
+** In this case, value of `whereClause` is :
+```sql
+((Extra.Guest = @PARAM_0)) AND (t1.Address like @PARAM_1 OR t1.Address like @PARAM_2 OR t1.Disabled = @PARAM_3 OR t1.Amout > @PARAM_4 OR t1.Price >= @PARAM_5 OR t1.Drink IN (mileshake,coffee) OR t1.Count < @PARAM_6 OR t1.Total <= @PARAM_7 OR t1.Url like @PARAM_8)
+```
+
 
 ## SqlExecuter
 An encapsulation layer of Ado.NET.
