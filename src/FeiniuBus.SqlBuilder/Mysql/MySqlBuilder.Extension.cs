@@ -7,6 +7,9 @@ namespace FeiniuBus.SqlBuilder.Mysql
         public void AddServices(IServiceCollection services)
         {
             services.AddScoped<ISqlBuilderFactory, MySqlBuilderFactory>();
+            services.AddScoped<ISelectBuilder, MysqlSelectBuilder>();
+            services.AddScoped<IWhereBuilder, MysqlWhereBuilder>();
+            services.AddScoped<IOrderByBuider, MysqlSelectBuilder>();
         }
     }
 }

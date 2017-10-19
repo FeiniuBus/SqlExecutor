@@ -9,7 +9,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
         {
         }
 
-        public SqlBuiderResult Buid()
+        public SqlBuiderResult Build()
         {
             if (string.IsNullOrEmpty(_tableName))
                 throw new Exception("TableName is Null.");

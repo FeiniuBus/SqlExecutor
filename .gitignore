@@ -261,3 +261,7 @@ __pycache__/
 *.pyc
 src/Westeros/app_data/
 src/FeiniuBus.Authorization/app_data/
+src/FeiniuBus.SqlBuilder/Properties/PublishProfiles/FolderProfile.pubxml
+src/FeiniuBus.SqlBuilder/Models/SqlFieldMappingsExtensions.cs
+src/FeiniuBus.LinqBuilder/Properties/PublishProfiles/FolderProfile.pubxml
+src/FeiniuBus.DynamicQuery/Properties/PublishProfiles/FolderProfile.pubxml

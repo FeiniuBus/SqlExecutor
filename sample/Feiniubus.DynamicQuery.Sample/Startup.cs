@@ -1,8 +1,10 @@
 ﻿using FeiniuBus;
+using FeiniuBus.SqlBuilder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace Feiniubus.DynamicQuery.Sample
 {
@@ -50,7 +52,32 @@ namespace Feiniubus.DynamicQuery.Sample
                 var dynamicQuery = builder.Build();
 
 
+                SqlBuilderSample(dynamicQuery, context.RequestServices.GetRequiredService<ISelectBuilder>());
             });
+        }
+
+
+        public void SqlBuilderSample(FeiniuBus.DynamicQuery dynamicQuery, ISelectBuilder selectBuilder)
+        {
+            var sb = new StringBuilder();
+            var mappings = new SqlFieldMappings();
+            mappings.Map("Guest", "t1.Guest")
+                           .Map("Address", "t1.Address")
+                           .Map("Disabled", "t1.Disabled")
+                           .Map("Amout", "t1.Amout")
+                           .Map("Price", "t1.Price")
+                           .Map("Drink", "t1.Drink")
+                           .Map("Count", "t1.Count")
+                           .Map("Total", "t1.Total")
+                           .Map("Url", "t1.Url");
+            selectBuilder.Mapping(mappings);
+            selectBuilder.Where(dynamicQuery.ParamGroup);
+
+            var whereClause = selectBuilder.BuildWhere();
+            var orderbyClause = selectBuilder.OrderBy(dynamicQuery.Order);
+
+            System.Console.WriteLine(whereClause);
+            System.Console.WriteLine(orderbyClause);
         }
     }
 }

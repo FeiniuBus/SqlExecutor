@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FeiniuBus;
+using FeiniuBus.SqlBuilder;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Microsoft.Extensions.DependencyInjection

@@ -15,7 +15,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
             _pir = new Dictionary<string, object>();
         }
 
-        public SqlBuiderResult Buid()
+        public SqlBuiderResult Build()
         {
             if (string.IsNullOrEmpty(_tableName))
                 throw new Exception("TableName is Null.");
