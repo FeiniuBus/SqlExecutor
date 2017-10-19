@@ -31,7 +31,7 @@ namespace FeiniuBus.ConsoleTest
             IDeleteBuilder deleteBuilder = new MysqlDeleteBuilder(new DefaultCharacterConverter());
             deleteBuilder.Delete("TestTable").Where(i => i.ParamBuilder.Equal("Id", 100).Equal("Id", 200));
 
-            Console.WriteLine(deleteBuilder.Buid());
+            Console.WriteLine(deleteBuilder.Build());
 
         }
     }
