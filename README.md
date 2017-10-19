@@ -4,9 +4,7 @@ FeiniuBus Database Operating Competents.Offering DynamicQuery, Object Mapper, Li
 # Support
  Framework | Support 
 ----|----
- netstandard1.6 | +Support
  netstandard2.0 | +Support
- netcoreapp1.1 | +Support
  netcoreapp2.0 | +Support
  golang | +[Client Only](https://github.com/FeiniuBus/SqlExecutor-Go)
 
