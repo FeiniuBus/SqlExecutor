@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FeiniuBus.SqlBuilder
 {
-    public class SqlMapper
+    public class SqlMapper : ISqlMapper
     {
         protected readonly SqlFieldMappings SqlFieldMappings;
 
