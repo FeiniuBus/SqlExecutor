@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Testing.Ctor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
@@ -12,11 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FeiniuBus.DynamicQuery\FeiniuBus.DynamicQuery.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.HashObject\FeiniuBus.HashObject.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.Mapper\FeiniuBus.Mapper.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.LinqBuilder\FeiniuBus.LinqBuilder.csproj" />
     <ProjectReference Include="..\..\src\FeiniuBus.SqlBuilder\FeiniuBus.SqlBuilder.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.SqlExecutor.Mysql\FeiniuBus.SqlExecutor.Mysql.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.SqlExecutor\FeiniuBus.SqlExecutor.csproj" />
   </ItemGroup>
 
   <ItemGroup>
