@@ -1,22 +1,47 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FeiniuBus.SqlBuilder.Mysql
 {
     public class MysqlSelectBuilder : MysqlWhereBuilder, ISelectBuilder
     {
-        private readonly ICharacterConverter _characterConverter;
-        public MysqlSelectBuilder(ICharacterConverter characterConverter) : base(characterConverter)
+
+        public MysqlSelectBuilder(IServiceProvider serviceProvider) : base(serviceProvider.GetRequiredService<ICharacterConverter>())
         {
-            _characterConverter = characterConverter;
+            ServiceProvider = serviceProvider;
         }
+
+        internal IServiceProvider ServiceProvider { get; set; }
+        internal IServiceScope ServiceScope { get; set; }
 
         [Obsolete("Unsupported.")]
         public SqlBuiderResult Build()
         {
             throw new System.NotImplementedException("暂时不支持SelectBuilder.");
+        }
+
+        public ISelectBuilder CreateScope()
+        {
+            var scope = ServiceProvider.CreateScope();
+            var builder = scope.ServiceProvider.GetRequiredService<ISelectBuilder>();
+            
+            if(builder is MysqlSelectBuilder)
+            {
+                ((MysqlSelectBuilder)builder).ServiceScope = scope;
+            }
+
+            return builder;
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                ServiceScope?.Dispose();
+            }
+            catch { }
         }
 
         public string OrderBy(IEnumerable<DynamicQueryOrder> orders, bool fieldConverter = true)
@@ -29,7 +54,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
 
                 if (fieldConverter)
                 {
-                    name = _characterConverter.FieldConverter(item.Name);
+                    name = CharacterConverter.FieldConverter(item.Name);
                 }
 
                 if (SqlFieldMappings.Any(x=>x.Key == item.Name))

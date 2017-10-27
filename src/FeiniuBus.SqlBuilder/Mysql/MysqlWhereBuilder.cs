@@ -4,20 +4,22 @@ namespace FeiniuBus.SqlBuilder.Mysql
     public class MysqlWhereBuilder : SqlMapper, IWhereBuilder
     {
         private readonly MysqlConverterHelper _mysqlConverterHelper;
-        private readonly ICharacterConverter _characterConverter;
         private DynamicQueryParamGroup _dynamicQueryParamGroup;
 
         public MysqlWhereBuilder(ICharacterConverter characterConverter)
         {
             _mysqlConverterHelper = new MysqlConverterHelper();
-            _characterConverter = characterConverter;
+            CharacterConverter = characterConverter;
         }
+
+        protected ICharacterConverter CharacterConverter { get; set; }
+
         public void Where(DynamicQueryParamGroup query, bool fieldConverter = true)
         {
             var queryModel = query;
             if (fieldConverter)
             {
-                queryModel = _characterConverter.ConverterDynamicQueryParamGroup(query);
+                queryModel = CharacterConverter.ConverterDynamicQueryParamGroup(query);
             }
             _dynamicQueryParamGroup = queryModel;
         }

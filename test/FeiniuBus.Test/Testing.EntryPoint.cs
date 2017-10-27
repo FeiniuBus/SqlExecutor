@@ -50,7 +50,7 @@ namespace FeiniuBus.Test
             //sql testing
             var sb = new StringBuilder();
             sb.AppendLine("SELECT * FROM TestingDto WHERE");
-            sb.AppendLine(whereClause);
+            sb.AppendLine(whereClause.Item1);
             sb.AppendLine("ORDER BY");
             sb.AppendLine(orderClause);
             sb.AppendLine(";");
