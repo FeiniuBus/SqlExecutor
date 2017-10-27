@@ -26,13 +26,21 @@ namespace FeiniuBus.SqlBuilder.Mysql
             return string.Join(",", orders.Select(item =>
             {
                 var name = item.Name;
-                var order = item.Sort == ListSortDirection.Ascending
-                  ? "ASC"
-                  : "DESC";
+
                 if (fieldConverter)
                 {
                     name = _characterConverter.FieldConverter(item.Name);
                 }
+
+                if (SqlFieldMappings.Any(x=>x.Key == item.Name))
+                {
+                    name = SqlFieldMappings.First(x => x.Key == item.Name).SqlField;
+                }
+               
+                var order = item.Sort == ListSortDirection.Ascending
+                  ? "ASC"
+                  : "DESC";
+               
                 return $" {name} {order} ";
 
             }));

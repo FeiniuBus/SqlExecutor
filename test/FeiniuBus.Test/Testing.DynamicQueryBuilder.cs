@@ -21,7 +21,7 @@
                             .LessThan("Count", 10)
                             .LessThanOrEqual("Total", 100)
                             .StartsWith("Url", "Http://");
-            builder.OrderBy("Amout", ListSortDirection.Ascending)
+            builder.OrderBy("Url", ListSortDirection.Ascending)
                 .Take(10);
             var dynamicQuery = builder.Build();
             return dynamicQuery;
