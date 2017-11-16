@@ -57,9 +57,9 @@ namespace FeiniuBus.SqlBuilder.Mysql
                     name = CharacterConverter.FieldConverter(item.Name);
                 }
 
-                if (SqlFieldMappings.Any(x=>x.Key == item.Name))
+                if (SqlFieldMappings.Any(x=>x.Key == name))
                 {
-                    name = SqlFieldMappings.First(x => x.Key == item.Name).SqlField;
+                    name = SqlFieldMappings.First(x => x.Key == name).SqlField;
                 }
                
                 var order = item.Sort == ListSortDirection.Ascending

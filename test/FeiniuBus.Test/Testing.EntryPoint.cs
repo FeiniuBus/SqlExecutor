@@ -23,7 +23,7 @@ namespace FeiniuBus.Test
             context.TestingDto.Add(new Model.TestingDto
             {
                 Id = Guid.NewGuid().ToString("N"),
-                Address = "chengdu lnk",
+                TestAddress = "chengdu lnk",
                 Disabled = false,
                 Amout = 11,
                 Price = 110,

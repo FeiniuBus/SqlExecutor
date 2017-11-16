@@ -10,7 +10,7 @@ namespace FeiniuBus.Test
         {
             var mappings = new SqlFieldMappings();
             mappings.Map("Extras.Guest", "t2.Guest")
-                    .Map("Address", "t1.Address")
+                    .Map("TestAddress", "t1.Address")
                     .Map("Disabled", "t1.Disabled")
                     .Map("Amout", "t1.Amout")
                     .Map("Price", "t1.Price")

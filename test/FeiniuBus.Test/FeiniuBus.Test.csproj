@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Testing.ChargeHistory.cs" />
     <None Include="Testing.Ctor.cs" />
   </ItemGroup>
 
