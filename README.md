@@ -13,6 +13,7 @@ Branch | Status | CI
 ----|----|----
 master | 2.0.0 | [![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=master)](https://travis-ci.org/FeiniuBus/SqlExecutor)[![Build status](https://ci.appveyor.com/api/projects/status/w49ddl7ydevg4kl5?svg=true)](https://ci.appveyor.com/project/standardcore/sqlexecutor)
 milestone/2.0.0 | RELEASED | [![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=milestone/2.0.0)](https://travis-ci.org/FeiniuBus/SqlExecutor)
+milestone/2.1.0| PRE | [![](https://travis-ci.org/FeiniuBus/SqlExecutor.svg?branch=milestone%2F2.1.0)](https://travis-ci.org/FeiniuBus/SqlExecutor)
 
 # Competents
 ## Dynamic Query
