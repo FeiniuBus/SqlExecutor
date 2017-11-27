@@ -2,7 +2,6 @@
 
 namespace FeiniuBus
 {
-
     public class HashObjectList : List<IHashObject>, IHashObjectList
     {
     }

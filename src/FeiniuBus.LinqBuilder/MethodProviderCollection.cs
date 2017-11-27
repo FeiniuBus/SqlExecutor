@@ -24,9 +24,7 @@ namespace FeiniuBus.LinqBuilder
         {
             var res = Collections.FirstOrDefault(i => i.Match(queryParam, propertyType));
             if (res == null)
-            {
                 return DefaultConverterProvider;
-            }
             return res;
         }
     }

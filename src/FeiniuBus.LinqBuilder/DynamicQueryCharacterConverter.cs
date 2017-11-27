@@ -32,17 +32,14 @@ namespace FeiniuBus.LinqBuilder
         {
             var result = new List<DynamicQueryOrder>();
             if (orders != null)
-            {
                 foreach (var item in orders)
-                {
-                    result.Add(new DynamicQueryOrder() { Name = FieldConverter(item.Name), Sort = item.Sort });
-                }
-            }
+                    result.Add(new DynamicQueryOrder {Name = FieldConverter(item.Name), Sort = item.Sort});
 
             return result;
         }
 
-        public static void ConverterDynamicQueryParamGroupFieldName(DynamicQueryParamGroup newGroup, DynamicQueryParamGroup old)
+        public static void ConverterDynamicQueryParamGroupFieldName(DynamicQueryParamGroup newGroup,
+            DynamicQueryParamGroup old)
         {
             if (newGroup == null)
                 throw new ArgumentNullException(nameof(newGroup));
@@ -50,7 +47,6 @@ namespace FeiniuBus.LinqBuilder
                 throw new ArgumentNullException(nameof(old));
             newGroup.Relation = old.Relation;
             if (old.Params != null && old.Params.Any())
-            {
                 foreach (var item in old.Params)
                 {
                     var param = new DynamicQueryParam();
@@ -59,7 +55,8 @@ namespace FeiniuBus.LinqBuilder
                     //处理特殊情况any
                     if (item.Operator == QueryOperation.Any)
                     {
-                        var anyGroup = JsonConvert.DeserializeObject<DynamicQueryParamGroup>(item.Value?.ToString() ?? "");
+                        var anyGroup =
+                            JsonConvert.DeserializeObject<DynamicQueryParamGroup>(item.Value?.ToString() ?? "");
                         var newAnyGroup = new DynamicQueryParamGroup();
                         ConverterDynamicQueryParamGroupFieldName(newAnyGroup, anyGroup);
                         param.Value = JsonConvert.SerializeObject(newAnyGroup);
@@ -70,19 +67,13 @@ namespace FeiniuBus.LinqBuilder
                     }
                     newGroup.Params.Add(param);
                 }
-            }
             if (old.ChildGroups != null && old.ChildGroups.Any())
-            {
-               
                 foreach (var childGroup in old.ChildGroups)
                 {
                     var newChildGroup = new DynamicQueryParamGroup();
                     ConverterDynamicQueryParamGroupFieldName(newChildGroup, childGroup);
                     newGroup.ChildGroups.Add(newChildGroup);
                 }
-               
-            }
-
         }
 
         public static string ConverterSelectFieldName(string select)
@@ -98,15 +89,13 @@ namespace FeiniuBus.LinqBuilder
                 return res;
             var arr = fieldName.Trim().Split('.').Where(i => !string.IsNullOrWhiteSpace(i)).ToList();
 
-            for (int i = 0; i < arr.Count; i++)
+            for (var i = 0; i < arr.Count; i++)
             {
                 var lineArr = arr[i].Split('_');
                 foreach (var line in lineArr)
-                {
                     if (line.Length > 1)
                         res += line.Substring(0, 1).ToUpper() + line.Substring(1);
                     else res += line.ToLower();
-                }
                 if (i < arr.Count - 1)
                     res += '.';
             }

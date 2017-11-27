@@ -1,5 +1,4 @@
-﻿using FeiniuBus.SqlBuilder;
-using FeiniuBus.SqlBuilder.Mysql;
+﻿using FeiniuBus.SqlBuilder.Mysql;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FeiniuBus.SqlBuilder
+﻿namespace FeiniuBus.SqlBuilder
 {
     /// <summary>
-    /// 
     /// </summary>
     public interface ISqlBuilderFactory
     {

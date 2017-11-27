@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json;
 
 namespace FeiniuBus.LinqBuilder
@@ -12,7 +11,8 @@ namespace FeiniuBus.LinqBuilder
             return queryParam.Operator == QueryOperation.Any;
         }
 
-        public void Converter(DynamicQueryParam queryParam, Type propertyType, DynamicQueryKeyValueCollection collection)
+        public void Converter(DynamicQueryParam queryParam, Type propertyType,
+            DynamicQueryKeyValueCollection collection)
         {
             if (!propertyType.IsConstructedGenericType)
                 throw new Exception("只有泛型类型能够使用此方法");
@@ -20,7 +20,7 @@ namespace FeiniuBus.LinqBuilder
             if (type == null)
                 throw new Exception("只有泛型类型能够使用此方法");
             var group = JsonConvert.DeserializeObject<DynamicQueryParamGroup>((queryParam.Value ?? "").ToString());
-            if ((group == null) || (group.ChildGroups == null))
+            if (group == null || group.ChildGroups == null)
                 return;
             ConverterHelper.CheckQueryParamGroup(group);
             collection.Builder.Append($"{queryParam.Field}.Any(");

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FeiniuBus.LinqBuilder
 {
-    class DynamicQueryKeyValueCollection
+    internal class DynamicQueryKeyValueCollection
     {
         public DynamicQueryKeyValueCollection()
         {

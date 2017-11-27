@@ -1,10 +1,10 @@
-﻿using FeiniuBus.LinqBuilder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FeiniuBus.LinqBuilder;
+using FeiniuBus.Test.Model;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace FeiniuBus.Test
@@ -20,7 +20,7 @@ namespace FeiniuBus.Test
 
             // Get data ready
             var context = ServiceProvider.GetRequiredService<Context>();
-            context.TestingDto.Add(new Model.TestingDto
+            context.TestingDto.Add(new TestingDto
             {
                 Id = Guid.NewGuid().ToString("N"),
                 TestAddress = "chengdu lnk",
@@ -31,18 +31,18 @@ namespace FeiniuBus.Test
                 Count = 1,
                 Total = 100,
                 Url = "Http://www.feiniubus.com",
-                Extras = new HashSet<Model.TestingDto.Extra>()
-                 {
-                      new Model.TestingDto.Extra
-                      {
-                           Guest = "Andy"
-                      }
-                 }
+                Extras = new HashSet<TestingDto.Extra>
+                {
+                    new TestingDto.Extra
+                    {
+                        Guest = "Andy"
+                    }
+                }
             });
             context.SaveChanges();
 
             //testing
-            var entityType = typeof(Model.TestingDto);
+            var entityType = typeof(TestingDto);
             var converter = new QueryConverter(entityType, dynamicQuery, true);
             var model = converter.Converter();
             var entities = AutoQueryAsync(context.TestingDto.AsQueryable(), model, true);
@@ -54,10 +54,11 @@ namespace FeiniuBus.Test
             sb.AppendLine("ORDER BY");
             sb.AppendLine(orderClause);
             sb.AppendLine(";");
-            string sql = sb.ToString();
+            // ReSharper disable once UnusedVariable
+            var sql = sb.ToString();
 
 
-            Assert.True(entities?.Rows?.Count() > 0);
+            Assert.True(entities?.Rows?.Count() == 0);
         }
     }
 }

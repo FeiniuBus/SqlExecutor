@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace FeiniuBus.Test.Model
 {
@@ -46,6 +46,5 @@ namespace FeiniuBus.Test.Model
 
         [JsonProperty("creator")]
         public long Creator { get; set; }
-
     }
 }

@@ -4,6 +4,6 @@ namespace FeiniuBus.Test
 {
     public partial class Testing
     {
-        IServiceProvider ServiceProvider;
+        private readonly IServiceProvider ServiceProvider;
     }
 }

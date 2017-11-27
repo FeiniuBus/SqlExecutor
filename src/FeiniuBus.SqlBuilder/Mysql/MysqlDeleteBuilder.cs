@@ -5,6 +5,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
     public class MysqlDeleteBuilder : MysqlWhereBuilder, IDeleteBuilder
     {
         private string _tableName;
+
         public MysqlDeleteBuilder(ICharacterConverter characterConverter) : base(characterConverter)
         {
         }
@@ -17,14 +18,10 @@ namespace FeiniuBus.SqlBuilder.Mysql
             res.SqlString.AppendLine($"DELETE FROM `{_tableName}` WHERE 1=1 ");
             var whereres = BuildWhere();
             if (whereres.SqlString.Length > 0)
-            {
-                res.SqlString.AppendLine(" AND " + whereres.SqlString.ToString());
-            }
+                res.SqlString.AppendLine(" AND " + whereres.SqlString);
             res.SqlString.Append(" ;");
             foreach (var item in whereres.Params)
-            {
                 res.Params.Add(item.Key, item.Value);
-            }
             return res;
         }
 

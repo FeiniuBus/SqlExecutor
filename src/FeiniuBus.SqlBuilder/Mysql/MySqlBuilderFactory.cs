@@ -1,6 +1,5 @@
 ﻿namespace FeiniuBus.SqlBuilder.Mysql
 {
-
     public class MySqlBuilderFactory : ISqlBuilderFactory
     {
         public IInsertBuider InsertBuider()
@@ -17,9 +16,5 @@
         {
             return new MysqlDeleteBuilder(new DefaultCharacterConverter());
         }
-
-
-
-
     }
 }

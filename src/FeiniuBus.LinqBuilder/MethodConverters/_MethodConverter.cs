@@ -9,7 +9,8 @@ namespace FeiniuBus.LinqBuilder
             return true;
         }
 
-        public void Converter(DynamicQueryParam queryParam, Type propertyType, DynamicQueryKeyValueCollection collection)
+        public void Converter(DynamicQueryParam queryParam, Type propertyType,
+            DynamicQueryKeyValueCollection collection)
         {
             var conValue = ConverterHelper.ChangeType(queryParam.Value, propertyType);
             var filed = queryParam.Field;

@@ -1,7 +1,6 @@
-﻿using FeiniuBus;
+﻿using System;
+using FeiniuBus;
 using FeiniuBus.SqlBuilder;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -17,9 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ISqlMapper, SqlMapper>();
 
             foreach (var extension in options.Extensions)
-            {
                 extension.AddServices(services);
-            }
         }
     }
 }

@@ -8,9 +8,10 @@ namespace FeiniuBus.SqlExecutor
         ISqlExecutor Create();
     }
 
-    public class SqlExecutorFactory: ISqlExecutorFactory
+    public class SqlExecutorFactory : ISqlExecutorFactory
     {
         private readonly IServiceProvider _serviceProvider;
+
         public SqlExecutorFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -20,9 +21,7 @@ namespace FeiniuBus.SqlExecutor
         {
             var services = _serviceProvider.GetService<ISqlExecutor>();
             if (services == null)
-            {
                 throw new Exception("未注册ISqlExecutor实例");
-            }
             return services;
         }
     }

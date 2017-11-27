@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FeiniuBus
 {
@@ -13,7 +11,7 @@ namespace FeiniuBus
         }
 
         public QueryRelation Relation { get; set; }
-        public List<DynamicQueryParamGroup> ChildGroups { get; private set; }
-        public List<DynamicQueryParam> Params { get; private set; }
+        public List<DynamicQueryParamGroup> ChildGroups { get; }
+        public List<DynamicQueryParam> Params { get; }
     }
 }

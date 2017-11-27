@@ -4,6 +4,6 @@ namespace FeiniuBus.SqlBuilder
 {
     public interface ISqlBuilderExtension
     {
-         void AddServices(IServiceCollection services);
+        void AddServices(IServiceCollection services);
     }
 }

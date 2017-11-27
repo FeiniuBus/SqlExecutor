@@ -10,22 +10,17 @@ namespace FeiniuBus.LinqBuilder
 {
     internal static class ConverterHelper
     {
+        private static readonly IDictionary<string, PropertyInfo[]> PropertyArrCache =
+            new Dictionary<string, PropertyInfo[]>();
+
         public static string ConverterSelect(string select)
         {
             if (string.IsNullOrWhiteSpace(select))
-            {
                 return "";
-            }
             if (!select.StartsWith("new("))
-            {
                 return $"new({select})";
-            }
             return select;
         }
-
-
-        private static readonly IDictionary<string, PropertyInfo[]> PropertyArrCache =
-            new Dictionary<string, PropertyInfo[]>();
 
         public static object ChangeType(object objValue, Type conversionType)
         {
@@ -54,14 +49,14 @@ namespace FeiniuBus.LinqBuilder
         public static void CheckQueryParamGroup([NotNull] DynamicQueryParamGroup group)
         {
             if (group == null) throw new ArgumentNullException(nameof(group));
-            if ((group.ChildGroups != null) && group.ChildGroups.Any() && (group.Params != null) && group.Params.Any())
+            if (group.ChildGroups != null && group.ChildGroups.Any() && group.Params != null && group.Params.Any())
                 throw new Exception("QueryParamGroup中不能同时存在Groups和Params");
         }
 
         public static bool IsParam([NotNull] DynamicQueryParamGroup group)
         {
             if (group == null) throw new ArgumentNullException(nameof(group));
-            return (group.Params != null) && group.Params.Any();
+            return group.Params != null && group.Params.Any();
         }
 
         public static PropertyInfo[] GetPropertyArr(Type entityType, string field)
@@ -113,6 +108,8 @@ namespace FeiniuBus.LinqBuilder
             {
                 var item = list[i];
                 CheckQueryParamGroup(item);
+                if (item.Relation == QueryRelation.AndNot || item.Relation == QueryRelation.OrNot)
+                    collection.Builder.Append("(");
                 if (IsParam(item))
                 {
                     ConverterQueryParams(entityType, item.Params, collection, item.Relation);
@@ -123,8 +120,12 @@ namespace FeiniuBus.LinqBuilder
                     ConverterQueryParamGroups(entityType, item.ChildGroups, collection, item.Relation);
                     collection.Builder.Append(")");
                 }
+                if (item.Relation == QueryRelation.AndNot || item.Relation == QueryRelation.OrNot)
+                    collection.Builder.Append(" == false )");
                 if (i < list.Count - 1)
-                    collection.Builder.Append(relation == QueryRelation.Or ? " || " : " && ");
+                    collection.Builder.Append(relation == QueryRelation.Or || relation == QueryRelation.OrNot
+                        ? " || "
+                        : " && ");
             }
         }
 

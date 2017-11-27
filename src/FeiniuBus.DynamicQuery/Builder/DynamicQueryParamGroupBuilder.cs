@@ -6,7 +6,6 @@
 
         public DynamicQueryParamGroupBuilder() : this(new DynamicQueryParamGroup())
         {
-
         }
 
         public DynamicQueryParamGroupBuilder(DynamicQueryParamGroup paramGroup)
@@ -14,6 +13,8 @@
             _paramGroup = paramGroup;
             ParamBuilder = new DynamicQueryParamBuilder(_paramGroup.Params);
         }
+
+        public DynamicQueryParamBuilder ParamBuilder { get; }
 
         public DynamicQueryParamGroupBuilder RelationAnd()
         {
@@ -31,14 +32,17 @@
             return this;
         }
 
-        public DynamicQueryParamBuilder ParamBuilder { get; }
+        public DynamicQueryParamGroup Build()
+        {
+            return _paramGroup;
+        }
 
         #region CreateChildGroup
 
         public DynamicQueryParamGroupBuilder CreateChildGroup(QueryRelation relation)
         {
             _paramGroup.CheckDynamicQueryParamGroup();
-            var childGroup = new DynamicQueryParamGroup { Relation = relation };
+            var childGroup = new DynamicQueryParamGroup {Relation = relation};
             _paramGroup.ChildGroups.Add(childGroup);
             return new DynamicQueryParamGroupBuilder(childGroup);
         }
@@ -53,8 +57,16 @@
             return CreateChildGroup(QueryRelation.Or);
         }
 
-        #endregion
+        public DynamicQueryParamGroupBuilder CreateChildAndNotGroup()
+        {
+            return CreateChildGroup(QueryRelation.AndNot);
+        }
 
-        public DynamicQueryParamGroup Build() => _paramGroup;
+        public DynamicQueryParamGroupBuilder CreateChildOrNotGroup()
+        {
+            return CreateChildGroup(QueryRelation.OrNot);
+        }
+
+        #endregion
     }
 }

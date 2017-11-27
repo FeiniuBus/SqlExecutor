@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FeiniuBus.SqlBuilder
+﻿namespace FeiniuBus.SqlBuilder
 {
     public interface IDeleteBuilder : IWhereBuilder, ISqlBuilder
     {

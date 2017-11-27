@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FeiniuBus.SqlExecutor
+﻿namespace FeiniuBus.SqlExecutor
 {
     public class SqlExecutorOptions
     {

@@ -12,7 +12,8 @@ namespace FeiniuBus.LinqBuilder
             return queryParam.Operator == QueryOperation.In;
         }
 
-        public void Converter(DynamicQueryParam queryParam, Type propertyType, DynamicQueryKeyValueCollection collection)
+        public void Converter(DynamicQueryParam queryParam, Type propertyType,
+            DynamicQueryKeyValueCollection collection)
         {
             if (string.IsNullOrWhiteSpace(queryParam.Value?.ToString()))
                 throw new ArgumentException("IN操作必须提供Value.");
@@ -24,11 +25,9 @@ namespace FeiniuBus.LinqBuilder
 
             var listType = typeof(List<>);
             var s = listType.MakeGenericType(propertyType);
-            IList list = Activator.CreateInstance(s) as IList;
+            var list = Activator.CreateInstance(s) as IList;
             foreach (var o in arr)
-            {
                 list.Add(o);
-            }
             object valObj = list;
 
             if (!arr.Any())

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace FeiniuBus
@@ -41,22 +40,22 @@ namespace FeiniuBus
             if (string.IsNullOrEmpty(fieldName))
                 throw new ArgumentNullException(nameof(fieldName));
             var res = string.Empty;
-            var arr = fieldName.Trim().Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            for (int i = 0; i < arr.Count; i++)
+            var arr = fieldName.Trim().Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            for (var i = 0; i < arr.Count; i++)
             {
                 var lineArr = arr[i].Split('_');
                 foreach (var line in lineArr)
-                {
                     if (line.Length > 1)
                         res += line.Substring(0, 1).ToUpper() + line.Substring(1);
                     else res += line.ToUpper();
-                }
                 if (i < arr.Count - 1)
                     res += '.';
             }
             return res;
         }
-        private void ConverterDynamicQueryParamGroupFieldName(DynamicQueryParamGroup newGroup, DynamicQueryParamGroup old)
+
+        private void ConverterDynamicQueryParamGroupFieldName(DynamicQueryParamGroup newGroup,
+            DynamicQueryParamGroup old)
         {
             if (newGroup == null)
                 throw new ArgumentNullException(nameof(newGroup));
@@ -64,7 +63,6 @@ namespace FeiniuBus
                 throw new ArgumentNullException(nameof(old));
             newGroup.Relation = old.Relation;
             if (old.Params != null && old.Params.Any())
-            {
                 foreach (var item in old.Params)
                 {
                     var param = new DynamicQueryParam();
@@ -73,7 +71,8 @@ namespace FeiniuBus
                     //处理特殊情况any
                     if (item.Operator == QueryOperation.Any)
                     {
-                        var anyGroup = JsonConvert.DeserializeObject<DynamicQueryParamGroup>(item.Value?.ToString() ?? "");
+                        var anyGroup =
+                            JsonConvert.DeserializeObject<DynamicQueryParamGroup>(item.Value?.ToString() ?? "");
                         var newAnyGroup = new DynamicQueryParamGroup();
                         ConverterDynamicQueryParamGroupFieldName(newAnyGroup, anyGroup);
                         param.Value = JsonConvert.SerializeObject(newAnyGroup);
@@ -84,35 +83,28 @@ namespace FeiniuBus
                     }
                     newGroup.Params.Add(param);
                 }
-            }
             if (old.ChildGroups != null && old.ChildGroups.Any())
-            {
-
                 foreach (var childGroup in old.ChildGroups)
                 {
                     var newChildGroup = new DynamicQueryParamGroup();
                     ConverterDynamicQueryParamGroupFieldName(newChildGroup, childGroup);
                     newGroup.ChildGroups.Add(newChildGroup);
                 }
-
-            }
-
         }
+
         private string ConverterSelectFieldName(string select)
         {
             if (select == null) return null;
-            return string.Join(",", select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(FieldConverter));
+            return string.Join(",",
+                select.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).Select(FieldConverter));
         }
+
         private List<DynamicQueryOrder> ConverterOrderFieldName(List<DynamicQueryOrder> orders)
         {
             var result = new List<DynamicQueryOrder>();
             if (orders != null)
-            {
                 foreach (var item in orders)
-                {
-                    result.Add(new DynamicQueryOrder() { Name = FieldConverter(item.Name), Sort = item.Sort });
-                }
-            }
+                    result.Add(new DynamicQueryOrder {Name = FieldConverter(item.Name), Sort = item.Sort});
             return result;
         }
     }

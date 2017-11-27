@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FeiniuBus.SqlBuilder
 {
@@ -9,6 +7,5 @@ namespace FeiniuBus.SqlBuilder
         IInsertBuider InsertInto(string tableName);
         IInsertBuider Values(string key, object value);
         IInsertBuider Values(IDictionary<string, object> keyvalues);
-
     }
 }

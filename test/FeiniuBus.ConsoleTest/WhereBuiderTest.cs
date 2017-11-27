@@ -4,18 +4,16 @@ using FeiniuBus.SqlBuilder.Mysql;
 
 namespace FeiniuBus.ConsoleTest
 {
-
     public class WhereBuiderTest
     {
-
         public static void Test()
         {
             IWhereBuilder builder = new MysqlWhereBuilder(new DefaultCharacterConverter());
-            builder.Mapping(new SqlFieldMappings()
+            builder.Mapping(new SqlFieldMappings
             {
-                { "Id","Id" },
-                { "User.Id","a.Id" },
-                { "Test.Name","a.Id" },
+                {"Id", "Id"},
+                {"User.Id", "a.Id"},
+                {"Test.Name", "a.Id"}
             });
             builder.Where(bu =>
             {
@@ -32,7 +30,6 @@ namespace FeiniuBus.ConsoleTest
             deleteBuilder.Delete("TestTable").Where(i => i.ParamBuilder.Equal("Id", 100).Equal("Id", 200));
 
             Console.WriteLine(deleteBuilder.Build());
-
         }
     }
 }

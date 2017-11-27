@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FeiniuBus
 {
-    static class DynamicQueryHelper
+    internal static class DynamicQueryHelper
     {
         public static void CheckDynamicQueryParamGroup(this DynamicQueryParamGroup group)
         {

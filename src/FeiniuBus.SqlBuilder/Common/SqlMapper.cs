@@ -15,6 +15,7 @@ namespace FeiniuBus.SqlBuilder
         {
             SqlFieldMappings.AddRange(mappings);
         }
+
         public virtual void Mapping(Action<SqlFieldMappings> mappings)
         {
             mappings.Invoke(SqlFieldMappings);

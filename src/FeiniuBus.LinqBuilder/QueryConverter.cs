@@ -10,7 +10,6 @@ namespace FeiniuBus.LinqBuilder
 
         public QueryConverter(Type entityType, DynamicQuery queryModel, bool characterConverter = false)
         {
-
             _queryModel = characterConverter ? DynamicQueryCharacterConverter.Converter(queryModel) : queryModel;
             _entityType = entityType;
         }

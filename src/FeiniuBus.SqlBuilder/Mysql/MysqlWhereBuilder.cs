@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace FeiniuBus.SqlBuilder.Mysql
 {
     public class MysqlWhereBuilder : SqlMapper, IWhereBuilder
@@ -18,11 +19,10 @@ namespace FeiniuBus.SqlBuilder.Mysql
         {
             var queryModel = query;
             if (fieldConverter)
-            {
                 queryModel = CharacterConverter.ConverterDynamicQueryParamGroup(query);
-            }
             _dynamicQueryParamGroup = queryModel;
         }
+
         public void Where(Action<DynamicQueryParamGroupBuilder> queryBuilder, bool fieldConverter = true)
         {
             var buider = new DynamicQueryParamGroupBuilder();
@@ -35,9 +35,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
         {
             var res = new SqlBuiderResult();
             if (_dynamicQueryParamGroup == null)
-            {
                 return new SqlBuiderResult();
-            }
             _mysqlConverterHelper.ConverterQueryParamGroup(_dynamicQueryParamGroup, res, SqlFieldMappings, null);
             return res;
         }

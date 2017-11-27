@@ -1,6 +1,5 @@
 ﻿using FeiniuBus.SqlBuilder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace FeiniuBus.Test
 {
@@ -10,13 +9,13 @@ namespace FeiniuBus.Test
         {
             var mappings = new SqlFieldMappings();
             mappings.Map("Extras.Guest", "t2.Guest")
-                    .Map("TestAddress", "t1.Address")
-                    .Map("Disabled", "t1.Disabled")
-                    .Map("Amout", "t1.Amout")
-                    .Map("Price", "t1.Price")
-                    .Map("Drink", "t1.Drink")
-                    .Map("Count", "t1.Count")
-                    .Map("Total", "t1.Total");
+                .Map("TestAddress", "t1.Address")
+                .Map("Disabled", "t1.Disabled")
+                .Map("Amout", "t1.Amout")
+                .Map("Price", "t1.Price")
+                .Map("Drink", "t1.Drink")
+                .Map("Count", "t1.Count")
+                .Map("Total", "t1.Total");
             // Native api also be supported
             mappings.Add("Url", "t1.Url");
             return mappings;
@@ -26,12 +25,12 @@ namespace FeiniuBus.Test
         {
             var mappings = new SqlFieldMappings();
             mappings.Map("zxc", "t1.Address")
-                    .Map("fgh", "t1.Disabled")
-                    .Map("asd", "t1.Amout")
-                    .Map("rty", "t1.Price")
-                    .Map("wer", "t1.Drink")
-                    .Map("qwe", "t1.Count")
-                    .Map("Abc", "t1.Total");
+                .Map("fgh", "t1.Disabled")
+                .Map("asd", "t1.Amout")
+                .Map("rty", "t1.Price")
+                .Map("wer", "t1.Drink")
+                .Map("qwe", "t1.Count")
+                .Map("Abc", "t1.Total");
             // Native api also be supported
             mappings.Add("Url", "t1.Url");
             return mappings;

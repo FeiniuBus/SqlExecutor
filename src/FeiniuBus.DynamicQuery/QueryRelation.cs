@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FeiniuBus
+﻿namespace FeiniuBus
 {
     public enum QueryRelation
     {
         And = 0,
-        Or
+        Or,
+        AndNot,
+        OrNot
     }
 }

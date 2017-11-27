@@ -26,7 +26,7 @@ namespace FeiniuBus
 
         private DynamicQueryParam CreateParam(QueryOperation opt, string field, object value)
         {
-            return new DynamicQueryParam { Operator = opt, Field = field, Value = value };
+            return new DynamicQueryParam {Operator = opt, Field = field, Value = value};
         }
 
         public DynamicQueryParamBuilder Equal(string field, object value)

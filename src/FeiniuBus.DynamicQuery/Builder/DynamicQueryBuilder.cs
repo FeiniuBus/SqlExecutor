@@ -44,8 +44,8 @@ namespace FeiniuBus
 
         public DynamicQueryBuilder OrderBy(string name, ListSortDirection sort = ListSortDirection.Ascending)
         {
-            if (!_query.Order.Any(i => (i.Name == name) && (i.Sort == sort)))
-                _query.Order.Add(new DynamicQueryOrder { Name = name, Sort = sort });
+            if (!_query.Order.Any(i => i.Name == name && i.Sort == sort))
+                _query.Order.Add(new DynamicQueryOrder {Name = name, Sort = sort});
             return this;
         }
 
@@ -58,7 +58,5 @@ namespace FeiniuBus
         {
             return new DynamicQueryBuilder(pager);
         }
-
-
     }
 }

@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace FeiniuBus.Test.Model
 {
@@ -9,9 +9,12 @@ namespace FeiniuBus.Test.Model
         {
             Extras = new HashSet<Extra>();
         }
+
         public string Id { get; set; }
+
         [JsonProperty("test_address")]
         public string TestAddress { get; set; }
+
         public bool Disabled { get; set; }
         public int Amout { get; set; }
         public double Price { get; set; }

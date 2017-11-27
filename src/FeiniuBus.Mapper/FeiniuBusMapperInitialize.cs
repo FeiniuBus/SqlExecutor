@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Generic;
 
 namespace FeiniuBus.Mapper
 {
@@ -19,12 +15,11 @@ namespace FeiniuBus.Mapper
         {
             _mapperConfig.Add(config);
         }
+
         public void AddMapperConfigs(IEnumerable<IMapperConfig> configs)
         {
             foreach (var mapperConfig in configs)
-            {
                 AddMapperConfig(mapperConfig);
-            }
         }
 
         public void Initialize()
@@ -32,12 +27,8 @@ namespace FeiniuBus.Mapper
             AutoMapper.Mapper.Initialize(map =>
             {
                 foreach (var item in _mapperConfig)
-                {
                     item.Configuration(map);
-                }
             });
         }
-
-
     }
 }

@@ -5,7 +5,7 @@ namespace FeiniuBus.Test
 {
     public partial class Testing
     {
-		public Testing()
+        public Testing()
         {
             IServiceCollection services = new ServiceCollection();
             services.AddSQLBuilder(opts => opts.UseMySQL());

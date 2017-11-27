@@ -52,13 +52,9 @@ namespace FeiniuBus.SqlBuilder.Mysql
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
             if (_pir.ContainsKey(key))
-            {
                 _pir[key] = value;
-            }
             else
-            {
                 _pir.Add(key, value);
-            }
             return this;
         }
 
@@ -67,9 +63,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
             if (keyvalues == null)
                 throw new ArgumentNullException(nameof(keyvalues));
             foreach (var item in keyvalues)
-            {
                 Values(item.Key, item.Value);
-            }
             return this;
         }
     }

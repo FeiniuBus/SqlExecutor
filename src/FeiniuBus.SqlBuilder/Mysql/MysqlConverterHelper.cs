@@ -2,46 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace FeiniuBus.SqlBuilder.Mysql
 {
-    class MysqlConverterHelper
+    internal class MysqlConverterHelper
     {
-        private static string __PAM_ = "PARAM_";
+        private static readonly string __PAM_ = "PARAM_";
 
         private string GetSqlKey(SqlFieldMappings mappings, DynamicQueryParam param, string parentKey)
         {
             var file = param.Field;
             if (!string.IsNullOrWhiteSpace(parentKey))
-            {
                 file = $"{parentKey}.{param.Field}";
-            }
 
             var item = mappings.SingleOrDefault(i => i.Key == file);
             if (item != null)
-            {
                 return item.SqlField;
-            }
             return file;
         }
-        
+
 
         private object GetSqlValue(SqlFieldMappings mappings, DynamicQueryParam param, string parentKey)
         {
             var file = param.Field;
             if (!string.IsNullOrWhiteSpace(parentKey))
-            {
                 file = $"{parentKey}.{param.Field}";
-            }
 
             var item = mappings.SingleOrDefault(i => i.Key == file);
             if (item?.Type != null && item.Type.GetTypeInfo().IsEnum)
             {
                 if (param.Operator == QueryOperation.In)
                 {
-                    var arr = param.Value.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    var arr = param.Value.ToString().Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
                     var objArr = new List<string>();
                     foreach (var s in arr)
                     {
@@ -58,18 +51,19 @@ namespace FeiniuBus.SqlBuilder.Mysql
         private bool IsParam(DynamicQueryParamGroup group)
         {
             if (group == null) throw new ArgumentNullException(nameof(group));
-            return (group.Params != null) && group.Params.Any();
+            return group.Params != null && group.Params.Any();
         }
 
         public void CheckQueryParamGroup(DynamicQueryParamGroup group)
         {
             if (group == null) throw new ArgumentNullException(nameof(group));
-            if ((group.ChildGroups != null) && group.ChildGroups.Any() && (group.Params != null) && group.Params.Any())
+            if (group.ChildGroups != null && group.ChildGroups.Any() && group.Params != null && group.Params.Any())
                 throw new Exception("QueryParamGroup中不能同时存在Groups和Params");
         }
 
-        public void ConverterQueryParamGroup(DynamicQueryParamGroup group, SqlBuiderResult collection, SqlFieldMappings mappings, string
-            parentKey)
+        public void ConverterQueryParamGroup(DynamicQueryParamGroup group, SqlBuiderResult collection,
+            SqlFieldMappings mappings, string
+                parentKey)
         {
             CheckQueryParamGroup(group);
             if (IsParam(group))
@@ -79,7 +73,8 @@ namespace FeiniuBus.SqlBuilder.Mysql
         }
 
 
-        public void ConverterQueryParamGroups(List<DynamicQueryParamGroup> groups, SqlBuiderResult collection, QueryRelation relation, SqlFieldMappings mappings, string parentKey)
+        public void ConverterQueryParamGroups(List<DynamicQueryParamGroup> groups, SqlBuiderResult collection,
+            QueryRelation relation, SqlFieldMappings mappings, string parentKey)
         {
             if (!groups.Any()) return;
             var list = groups.ToList();
@@ -87,6 +82,8 @@ namespace FeiniuBus.SqlBuilder.Mysql
             {
                 var item = list[i];
                 CheckQueryParamGroup(item);
+                if (item.Relation == QueryRelation.AndNot || item.Relation == QueryRelation.OrNot)
+                    collection.SqlString.Append("(");
                 if (IsParam(item))
                 {
                     ConverterQueryParams(item.Params, collection, item.Relation, mappings, parentKey);
@@ -97,13 +94,18 @@ namespace FeiniuBus.SqlBuilder.Mysql
                     ConverterQueryParamGroups(item.ChildGroups, collection, item.Relation, mappings, parentKey);
                     collection.SqlString.Append(")");
                 }
+                if (item.Relation == QueryRelation.AndNot || item.Relation == QueryRelation.OrNot)
+                    collection.SqlString.Append("=false)");
                 if (i < list.Count - 1)
-                    collection.SqlString.Append(relation == QueryRelation.And ? " AND " : " OR ");
+                    collection.SqlString.Append(relation == QueryRelation.And || relation == QueryRelation.AndNot
+                        ? " AND "
+                        : " OR ");
             }
         }
 
 
-        public void ConverterQueryParams(List<DynamicQueryParam> queryParams, SqlBuiderResult collection, QueryRelation relation, SqlFieldMappings mappings, string parentKey)
+        public void ConverterQueryParams(List<DynamicQueryParam> queryParams, SqlBuiderResult collection,
+            QueryRelation relation, SqlFieldMappings mappings, string parentKey)
         {
             if (!queryParams.Any())
                 return;
@@ -111,7 +113,6 @@ namespace FeiniuBus.SqlBuilder.Mysql
             collection.SqlString.Append("(");
             for (var i = 0; i < list.Count; i++)
             {
-
                 var item = list[i];
                 var field = item.Operator == QueryOperation.Any ? "" : GetSqlKey(mappings, item, parentKey);
                 var param = $"@{__PAM_}{collection.Params.Count}";
@@ -119,7 +120,6 @@ namespace FeiniuBus.SqlBuilder.Mysql
 
                 switch (item.Operator)
                 {
-
                     case QueryOperation.Equal:
                         collection.SqlString.Append($"{field} = {param}");
                         collection.Params.Add(param, val);
@@ -153,14 +153,10 @@ namespace FeiniuBus.SqlBuilder.Mysql
                         collection.SqlString.Append($"{field} like {param}");
                         break;
                     case QueryOperation.DataTimeLessThanOrEqualThenDay:
-                        if (DateTime.TryParse(val.ToString(), out DateTime date))
-                        {
+                        if (DateTime.TryParse(val.ToString(), out var date))
                             val = date.AddDays(1).AddMilliseconds(-1);
-                        }
                         else
-                        {
                             break;
-                        }
                         collection.Params.Add(param, val);
                         collection.SqlString.Append($"{field} <= {param}");
                         break;
@@ -170,13 +166,12 @@ namespace FeiniuBus.SqlBuilder.Mysql
                         break;
                     case QueryOperation.Any:
                         var group = JsonConvert.DeserializeObject<DynamicQueryParamGroup>((val ?? "").ToString());
-                        if ((group == null) || (group.ChildGroups == null))
+                        if (group == null || group.ChildGroups == null)
                             break;
                         ConverterQueryParamGroup(group, collection, mappings, item.Field);
                         break;
                     default:
                         throw new ArgumentException($"{nameof(QueryOperation)}无效");
-
                 }
 
 

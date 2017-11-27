@@ -1,14 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FeiniuBus.SqlBuilder.Mysql
 {
     public class MysqlSelectBuilder : MysqlWhereBuilder, ISelectBuilder
     {
-
-        public MysqlSelectBuilder(IServiceProvider serviceProvider) : base(serviceProvider.GetRequiredService<ICharacterConverter>())
+        public MysqlSelectBuilder(IServiceProvider serviceProvider) : base(serviceProvider
+            .GetRequiredService<ICharacterConverter>())
         {
             ServiceProvider = serviceProvider;
         }
@@ -19,18 +19,16 @@ namespace FeiniuBus.SqlBuilder.Mysql
         [Obsolete("Unsupported.")]
         public SqlBuiderResult Build()
         {
-            throw new System.NotImplementedException("暂时不支持SelectBuilder.");
+            throw new NotImplementedException("暂时不支持SelectBuilder.");
         }
 
         public ISelectBuilder CreateScope()
         {
             var scope = ServiceProvider.CreateScope();
             var builder = scope.ServiceProvider.GetRequiredService<ISelectBuilder>();
-            
-            if(builder is MysqlSelectBuilder)
-            {
-                ((MysqlSelectBuilder)builder).ServiceScope = scope;
-            }
+
+            if (builder is MysqlSelectBuilder)
+                ((MysqlSelectBuilder) builder).ServiceScope = scope;
 
             return builder;
         }
@@ -41,33 +39,36 @@ namespace FeiniuBus.SqlBuilder.Mysql
             {
                 ServiceScope?.Dispose();
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         public string OrderBy(IEnumerable<DynamicQueryOrder> orders, bool fieldConverter = true)
         {
-            if (orders == null || !orders.Any()) return string.Empty;
+            var dynamicQueryOrders = orders as IList<DynamicQueryOrder> ?? orders.ToList();
+            if (orders == null || !dynamicQueryOrders.Any()) return string.Empty;
 
-            return string.Join(",", orders.Select(item =>
+            return string.Join(",", dynamicQueryOrders.Select(item =>
             {
                 var name = item.Name;
 
                 if (fieldConverter)
-                {
                     name = CharacterConverter.FieldConverter(item.Name);
-                }
 
-                if (SqlFieldMappings.Any(x=>x.Key == name))
+                var name1 = name;
+                if (SqlFieldMappings.Any(x => x.Key == name1))
                 {
-                    name = SqlFieldMappings.First(x => x.Key == name).SqlField;
+                    var name2 = name;
+                    name = SqlFieldMappings.First(x => x.Key == name2).SqlField;
                 }
-               
-                var order = item.Sort == ListSortDirection.Ascending
-                  ? "ASC"
-                  : "DESC";
-               
-                return $" {name} {order} ";
 
+                var order = item.Sort == ListSortDirection.Ascending
+                    ? "ASC"
+                    : "DESC";
+
+                return $" {name} {order} ";
             }));
         }
     }

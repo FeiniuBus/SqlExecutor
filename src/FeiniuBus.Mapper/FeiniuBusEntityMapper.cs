@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FeiniuBus.Mapper
+﻿namespace FeiniuBus.Mapper
 {
     public class FeiniuBusEntityMapper : IEntityMapper
     {
@@ -14,8 +10,7 @@ namespace FeiniuBus.Mapper
 
         public TDestination Mapper<TSource, TDestination>(TSource model, TDestination destination)
         {
-            return AutoMapper.Mapper.Map<TSource, TDestination>(model, destination);
+            return AutoMapper.Mapper.Map(model, destination);
         }
     }
-
 }

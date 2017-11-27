@@ -35,16 +35,11 @@ namespace FeiniuBus.SqlBuilder.Mysql
             var whereRes = BuildWhere();
 
             if (whereRes.SqlString.Length > 0)
-            {
-                res.SqlString.AppendLine(" AND " + whereRes.SqlString.ToString());
-            }
+                res.SqlString.AppendLine(" AND " + whereRes.SqlString);
             res.SqlString.Append(" ;");
             foreach (var item in whereRes.Params)
-            {
                 res.Params.Add(item.Key, item.Value);
-            }
             return res;
-
         }
 
         public IUpdateBuilder Update(string tableName)
@@ -58,13 +53,9 @@ namespace FeiniuBus.SqlBuilder.Mysql
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
             if (_pir.ContainsKey(key))
-            {
                 _pir[key] = value;
-            }
             else
-            {
                 _pir.Add(key, value);
-            }
             return this;
         }
 
@@ -73,9 +64,7 @@ namespace FeiniuBus.SqlBuilder.Mysql
             if (values == null)
                 throw new ArgumentNullException(nameof(values));
             foreach (var item in values)
-            {
                 Set(item.Key, item.Value);
-            }
             return this;
         }
     }

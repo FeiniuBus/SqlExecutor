@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Threading.Tasks;
 
 namespace FeiniuBus.SqlExecutor
@@ -13,6 +12,4 @@ namespace FeiniuBus.SqlExecutor
 
         Task<int> ExecuteNonQueryAsync(string sql, IHashObject param);
     }
-
-
 }
