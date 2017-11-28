@@ -6,12 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FeiniuBus.DynamicQuery\FeiniuBus.DynamicQuery.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.HashObject\FeiniuBus.HashObject.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.Mapper\FeiniuBus.Mapper.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.SqlBuilder\FeiniuBus.SqlBuilder.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.SqlExecutor.Mysql\FeiniuBus.SqlExecutor.Mysql.csproj" />
-    <ProjectReference Include="..\..\src\FeiniuBus.SqlExecutor\FeiniuBus.SqlExecutor.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FeiniuBus.DynamicQ.Core\FeiniuBus.DynamicQ.Core.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.DynamicQ.Linq\FeiniuBus.DynamicQ.Linq.csproj" />
   </ItemGroup>
 
 </Project>

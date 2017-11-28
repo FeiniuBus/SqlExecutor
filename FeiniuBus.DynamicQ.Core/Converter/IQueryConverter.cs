@@ -3,9 +3,9 @@ using FeiniuBus.DynamicQ.Infrastructure;
 
 namespace FeiniuBus.DynamicQ.Converter
 {
-    public interface IQueryConverter<out TResult>
+    public interface IQueryConverter<out TResult> : IDisposable
     {
-        bool CanConvert(ClientTypes clientType, DynamicQuery query, Type entityType, bool characterConverter);
+        Convertable CanConvert(ClientTypes clientType, DynamicQuery query, Type entityType, bool characterConverter);
 
         TResult Convert(ClientTypes clientType, DynamicQuery query, Type entityType, bool characterConverter);
     }

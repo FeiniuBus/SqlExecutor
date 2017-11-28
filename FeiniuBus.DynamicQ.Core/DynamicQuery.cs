@@ -5,6 +5,9 @@ using System.Linq;
 using System.Reflection;
 using FeiniuBus.DynamicQ.Infrastructure;
 using FeiniuBus.DynamicQ.Internal;
+using FeiniuBus.DynamicQ.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace FeiniuBus.DynamicQ
 {
@@ -35,8 +38,10 @@ namespace FeiniuBus.DynamicQ
         {
             ChildGroups = new List<DynamicQueryParamGroup>();
             Params = new List<DynamicQueryParam>();
+            Relation = QueryRelations.And;
         }
 
+        [JsonConverter(typeof(QueryRelationsJsonConverter))]
         public QueryRelations Relation { get; set; }
         public List<DynamicQueryParamGroup> ChildGroups { get; }
         public List<DynamicQueryParam> Params { get; }
@@ -57,6 +62,7 @@ namespace FeiniuBus.DynamicQ
     public class DynamicQueryParam
     {
         public string Field { get; set; }
+        [JsonConverter(typeof(QueryOperationsJsonConverter))]
         public QueryOperations Operator { get; set; }
         public object Value { get; set; }
 
@@ -71,8 +77,8 @@ namespace FeiniuBus.DynamicQ
                 var k = "";
                 for (var i = 0; i < props.Length; i++)
                 {
-                    property = typeOfProp.GetProperty(props[i],
-                        BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                    property = FindProperty(typeOfProp, props[i]);
+
                     if (property == null)
                         throw new ArgumentException($"Field {Field} not found in {entityType.FullName}");
                     k += (i>0 ? "." : "") + props[i];
@@ -80,6 +86,14 @@ namespace FeiniuBus.DynamicQ
                 }
             }
             return property;
+        }
+
+        private PropertyInfo FindProperty(Type entityType, string name)
+        {
+            return entityType
+                .GetProperties().FirstOrDefault(x => x.Name == name
+                            || x.GetCustomAttributes().Any(attr =>
+                                attr is JsonPropertyAttribute && ((JsonPropertyAttribute) attr).PropertyName == name));
         }
     }
 

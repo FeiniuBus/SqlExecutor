@@ -1,12 +1,11 @@
-﻿using System;
+﻿using FeiniuBus.DynamicQ.Converter;
+using FeiniuBus.DynamicQ.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using FeiniuBus.DynamicQ.Converter;
-using FeiniuBus.DynamicQ.Infrastructure;
-using FeiniuBus.DynamicQ.Internal;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace FeiniuBus.DynamicQ.Linq
 {
@@ -14,25 +13,25 @@ namespace FeiniuBus.DynamicQ.Linq
     {
         private readonly LinqContext _context;
         private readonly IServiceScope _scope;
+        private readonly IServiceProvider _applicationServices;
 
         public LinqQueryConverter(IServiceProvider applicationServices)
         {
             _scope = applicationServices.CreateScope();
-            _context = _scope.ServiceProvider.GetRequiredService<LinqContext>();
+            _applicationServices = _scope.ServiceProvider;
+            _context = _applicationServices.GetRequiredService<LinqContext>();
         }
 
-        public bool CanConvert(ClientTypes clientType, DynamicQuery query, Type entityType, bool characterConverter)
+        public Convertable CanConvert(ClientTypes clientType, DynamicQuery query, Type entityType, bool characterConverter)
         {
             return clientType == ClientTypes.EntityFramework;
         }
 
-        public LinqConvertResult Convert(ClientTypes clientType, DynamicQuery query, Type entityType,
-            bool characterConverter)
+        public LinqConvertResult Convert(ClientTypes clientType, DynamicQuery query, Type entityType, bool characterConverter)
         {
-            var applicationServices = _scope.ServiceProvider;
-            var groupConverters = applicationServices.GetServices<IParameterGroupConverter>();
+            var groupConverters = _applicationServices.GetServices<IParameterGroupConverter>();
             var groupConverter = groupConverters.FirstOrDefault(x =>
-                x.CanConvert(ClientTypes.EntityFramework, entityType, query.ParamGroup, query.ParamGroup.Relation));
+                x.CanConvert(ClientTypes.EntityFramework, entityType, query.ParamGroup, query.ParamGroup.Relation).ThrowIfCouldNotConvert());
             if (groupConverter == null)
                 throw new Exception($"Converter of ParamGroup for {ClientTypes.EntityFramework} not found.");
             groupConverter.Convert(entityType, query.ParamGroup, query.ParamGroup.Relation);
@@ -43,7 +42,7 @@ namespace FeiniuBus.DynamicQ.Linq
                 Select = ConvertSelect(query.Select),
                 Skip = query.Skip,
                 Take = query.Take,
-                Where = _context.Parameters.Statement.ToString().Replace("( && (","(").Replace("( || (", "("),
+                Where = _context.Parameters.Statement.ToString().Replace("( && (", "((").Replace("( || (", "(("),
                 WhereValue = _context.Parameters.Values.ToArray()
             };
         }
@@ -79,11 +78,9 @@ namespace FeiniuBus.DynamicQ.Linq
             return select;
         }
 
-        private void ConfigureReflection(Type entityType)
+        public void Dispose()
         {
-            var accessor = _scope.ServiceProvider.GetRequiredService<IPropertyAccessor>();
-            if (accessor.Load(entityType.FullName) != null) return;
-
+            _scope?.Dispose();
         }
     }
 }

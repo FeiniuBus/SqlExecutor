@@ -13,7 +13,7 @@ namespace FeiniuBus.DynamicQ.Linq
             services.TryAddSingleton<IPropertyAccessor, PropertyAccessor>();
 
             services.AddScoped<IQueryConverter<LinqConvertResult>, LinqQueryConverter>();
-            services.TryAddScoped<LinqQueryConverter>();
+            //services.TryAddScoped<LinqQueryConverter>();
 
             services.AddScoped<LinqContext>();
 

@@ -1,10 +1,10 @@
 ﻿namespace FeiniuBus.DynamicQ.Infrastructure
 {
-    public sealed partial class ClientTypes
+    public  partial class ClientTypes
     {
         private readonly string _value;
 
-        private ClientTypes(string value)
+        internal ClientTypes(string value)
         {
             _value = value;
         }
@@ -19,38 +19,31 @@
             return operation._value;
         }
 
-        public override int GetHashCode()
-        {
-            return _value.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            switch (obj)
-            {
-                case ClientTypes operations:
-                    return operations._value == _value;
-                case string s:
-                    return _value == s;
-            }
-            return false;
-        }
-
         public override string ToString()
         {
             return _value;
         }
 
+        public override bool Equals(object obj)
+        {
+            return ToString() == obj.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
+        }
+
         public static bool operator ==(ClientTypes left, ClientTypes right)
         {
-            return left != null && left.Equals(right);
+            // ReSharper disable once PossibleNullReferenceException
+            return left.Equals(right);
         }
 
         public static bool operator !=(ClientTypes left, ClientTypes right)
         {
-            if (left == null && right == null) return false;
-            if (right != null && left != null && left._value == right._value) return false;
-            return true;
+            // ReSharper disable once PossibleNullReferenceException
+            return !left.Equals(right);
         }
     }
 }

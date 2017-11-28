@@ -1,10 +1,10 @@
 ﻿namespace FeiniuBus.DynamicQ.Infrastructure
 {
-    public sealed partial class QueryOperations
+    public partial class QueryOperations
     {
         private readonly string _value;
 
-        private QueryOperations(string value)
+        internal QueryOperations(string value)
         {
             _value = value;
         }
@@ -19,21 +19,14 @@
             return operation._value;
         }
 
-        public override int GetHashCode()
-        {
-            return _value.GetHashCode();
-        }
-
         public override bool Equals(object obj)
         {
-            switch (obj)
-            {
-                case QueryOperations operations:
-                    return operations._value == _value;
-                case string s:
-                    return _value == s;
-            }
-            return false;
+            return obj.ToString() == ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
         }
 
         public override string ToString()
@@ -43,14 +36,14 @@
 
         public static bool operator ==(QueryOperations left, QueryOperations right)
         {
-            return left != null && left.Equals(right);
+            // ReSharper disable once PossibleNullReferenceException
+            return left.Equals(right);
         }
 
         public static bool operator !=(QueryOperations left, QueryOperations right)
         {
-            if (left == null && right == null) return false;
-            if (right != null && left != null && left._value == right._value) return false;
-            return true;
+            // ReSharper disable once PossibleNullReferenceException
+            return !left.Equals(right);
         }
     }
 }

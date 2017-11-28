@@ -23,10 +23,10 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
             _propertyAccessor = propertyAccessor;
         }
 
-        public bool CanConvert(ClientTypes clientType, Type entityType, DynamicQueryParamGroup group,
+        public Convertable CanConvert(ClientTypes clientType, Type entityType, DynamicQueryParamGroup group,
             QueryRelations relation)
         {
-            if (clientType != ClientTypes.EntityFramework) return false;
+            if (!clientType.Equals(ClientTypes.EntityFramework)) return false;
             group.Check();
             return true;
         }
@@ -41,7 +41,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
             if (group.IsParam())
             {
                 var relationConverter = _relationConverters.FirstOrDefault(x =>
-                    x.CanConvert(ClientTypes.EntityFramework, entityType, relation));
+                    x.CanConvert(ClientTypes.EntityFramework, entityType, relation).ThrowIfCouldNotConvert());
                 if (relationConverter == null)
                     throw new Exception(
                         $"Converter of '{relation}' for {ClientTypes.EntityFramework} not found.");
@@ -53,10 +53,15 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
                 {
                     var converter = _operationConverters.FirstOrDefault(x =>
                         x.CanConvert(ClientTypes.EntityFramework, entityType, p.Field, p.Value, p.Operator,
-                            p.GetPropertyInfo(entityType, _propertyAccessor), group.Relation));
+                            p.GetPropertyInfo(entityType, _propertyAccessor), group.Relation).ThrowIfCouldNotConvert());
                     if (converter == null)
                         throw new Exception(
                             $"Converter of '{p.Operator}' for {ClientTypes.EntityFramework} not found.");
+
+                    if (converter is ParamGroupConverterInjectedOperationConverter)
+                    {
+                        ((ParamGroupConverterInjectedOperationConverter)converter).ParameterGroupConverter = this;
+                    }
 
                     converter.Convert(entityType, _context.Parameters.NextParameterName(), p.Field, p.Value, p.Operator,
                         p.GetPropertyInfo(entityType, _propertyAccessor), group.Relation);
@@ -68,7 +73,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
             else
             {
                 foreach (var child in group.ChildGroups)
-                    Recur(entityType, child, group.Relation);
+                    Recur(entityType, child, child.Relation);
             }
         }
     }

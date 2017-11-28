@@ -6,7 +6,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
 {
     public class RelationAndNotConverter : IRelationConverter
     {
-        public bool CanConvert(ClientTypes clientType, Type entityType, QueryRelations relationt)
+        public Convertable CanConvert(ClientTypes clientType, Type entityType, QueryRelations relationt)
         {
             return clientType == ClientTypes.EntityFramework && relationt == QueryRelations.AndNot;
         }

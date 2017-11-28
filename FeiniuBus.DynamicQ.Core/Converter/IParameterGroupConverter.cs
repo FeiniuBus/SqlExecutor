@@ -5,7 +5,7 @@ namespace FeiniuBus.DynamicQ.Converter
 {
     public interface IParameterGroupConverter
     {
-        bool CanConvert(ClientTypes clientType, Type entityType, DynamicQueryParamGroup group, QueryRelations relation);
+        Convertable CanConvert(ClientTypes clientType, Type entityType, DynamicQueryParamGroup group, QueryRelations relation);
 
         void Convert(Type entityType, DynamicQueryParamGroup group, QueryRelations relation);
     }

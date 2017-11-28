@@ -1,6 +1,6 @@
 ﻿namespace FeiniuBus.DynamicQ.Infrastructure
 {
-    public sealed partial class QueryOperations
+    public partial class QueryOperations
     {
         /// <summary>
         ///     等于

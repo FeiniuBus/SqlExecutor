@@ -17,7 +17,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
         protected LinqContext Context { get; }
         protected IEnumerable<IRelationConverter> RelationConverters { get; }
 
-        public abstract bool CanConvert(ClientTypes clientType, Type entityType, string field, object value,
+        public abstract Convertable CanConvert(ClientTypes clientType, Type entityType, string field, object value,
             QueryOperations operation, PropertyInfo property, QueryRelations relations);
 
         public abstract void Convert(Type entityType, string parameterName, string field, object value,

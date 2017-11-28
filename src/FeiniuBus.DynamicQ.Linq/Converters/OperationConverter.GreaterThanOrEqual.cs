@@ -14,7 +14,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
         {
         }
 
-        public override bool CanConvert(ClientTypes clientType, Type entityType, string field, object value,
+        public override Convertable CanConvert(ClientTypes clientType, Type entityType, string field, object value,
             QueryOperations operation, PropertyInfo property, QueryRelations relations)
         {
             return clientType == ClientTypes.EntityFramework && operation == QueryOperations.GreaterThanOrEqual;
@@ -23,10 +23,10 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
         public override void Convert(Type entityType, string parameterName, string field, object value,
             QueryOperations operation, PropertyInfo property, QueryRelations relations)
         {
-            var clause = $"{field} >= @{parameterName})";
+            var clause = $"{property.Name} >= @{parameterName}";
             var clause1 = clause;
             var relationConverter = RelationConverters.FirstOrDefault(x => x.CanConvert(ClientTypes.EntityFramework,
-                entityType, relations));
+                entityType, relations).ThrowIfCouldNotConvert());
             if (relationConverter == null)
                 throw new Exception($"Converter '{relations}' for {ClientTypes.EntityFramework} not found.");
             clause = relationConverter.Convert(entityType, relations, Context.Parameters.CurrentIndex(), clause);
