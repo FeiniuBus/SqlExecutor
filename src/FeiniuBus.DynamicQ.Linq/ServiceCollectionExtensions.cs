@@ -27,6 +27,7 @@ namespace FeiniuBus.DynamicQ.Linq
             services.AddScoped<IOperationConverter, OperationLessThanConverter>();
             services.AddScoped<IOperationConverter, OperationLessThanOrEqualConverter>();
             services.AddScoped<IOperationConverter, OperationStartsWithConverter>();
+            services.AddScoped<IOperationConverter, OperationNotConverter>();
             services.AddScoped<IParameterGroupConverter, ParameterGroupConverter>();
             services.AddScoped<IRelationConverter, RelationAndConverter>();
             services.AddScoped<IRelationConverter, RelationAndNotConverter>();

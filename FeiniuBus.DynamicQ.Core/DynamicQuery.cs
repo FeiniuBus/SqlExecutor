@@ -68,6 +68,7 @@ namespace FeiniuBus.DynamicQ
 
         public PropertyInfo GetPropertyInfo(Type entityType, IPropertyAccessor propertyAccessor)
         {
+            if (Field == "COMMAND::SKIP") return null;
             var key = $"{entityType.FullName}_{Field}";
             var property = propertyAccessor.Load(key);
             var typeOfProp = entityType;

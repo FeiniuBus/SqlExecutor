@@ -48,6 +48,8 @@
         public static QueryOperations In => "In";
 
         public static QueryOperations Any => "Any";
+
+        public static QueryOperations Not => "Not";
         //public static QueryOperations DataTimeLessThanOrEqualThenDay => "DataTimeLessThanOrEqualThenDay";
     }
 }

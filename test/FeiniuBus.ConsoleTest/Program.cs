@@ -19,7 +19,9 @@ namespace FeiniuBus.ConsoleTest
 
             var builder = FeiniuBus.DynamicQ.Builder.DynamicQueryBuilder.Create(true);
             var child1 = builder.ParamGroupBuilder.CreateChildAndGroup();
-            child1.ParamBuilder.Any("Extras", sub => { sub.ParamBuilder.Equal("Guest", "Andy"); });
+            child1.ParamBuilder.Not(not =>
+                not.ParamBuilder.Any("Extras", sub => { sub.ParamBuilder.Equal("Guest", "Andy"); }));
+            //child1.ParamBuilder;
             var child2 = builder.ParamGroupBuilder.CreateChildAndGroup()
                 .ParamBuilder
                 .Contains("test_address", "chengdu")

@@ -144,6 +144,14 @@ namespace FeiniuBus.DynamicQ.Builder
             return Add(CreateParam(QueryOperations.Any, field, JsonConvert.SerializeObject(group)));
         }
 
+        public DynamicQueryParamBuilder Not(Action<DynamicQueryParamGroupBuilder> builder)
+        {
+            var group = new DynamicQueryParamGroup();
+            var bu = new DynamicQueryParamGroupBuilder(group);
+            builder.Invoke(bu);
+            return Add(CreateParam(QueryOperations.Not, "COMMAND::SKIP", JsonConvert.SerializeObject(group)));
+        }
+
         //public DynamicQueryParamBuilder DataTimeLessThanOrEqualThenDay(string field, DateTime value)
         //{
         //    return Add(CreateParam(QueryOperations.DataTimeLessThanOrEqualThenDay, field, value));
