@@ -1,4 +1,5 @@
 ﻿using System;
+using FeiniuBus.Converter;
 using FeiniuBus.SqlBuilder;
 using FeiniuBus.SqlBuilder.Mysql;
 

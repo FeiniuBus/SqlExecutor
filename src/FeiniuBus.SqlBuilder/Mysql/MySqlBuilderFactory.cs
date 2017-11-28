@@ -1,4 +1,6 @@
-﻿namespace FeiniuBus.SqlBuilder.Mysql
+﻿using FeiniuBus.Converter;
+
+namespace FeiniuBus.SqlBuilder.Mysql
 {
     public class MySqlBuilderFactory : ISqlBuilderFactory
     {

@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\FeiniuBus.DynamicQ.Core\FeiniuBus.DynamicQ.Core.csproj" />
+    <ProjectReference Include="..\..\src\FeiniuBus.DynamicQ.Linq\FeiniuBus.DynamicQ.Linq.csproj" />
     <ProjectReference Include="..\..\src\FeiniuBus.DynamicQuery\FeiniuBus.DynamicQuery.csproj" />
     <ProjectReference Include="..\..\src\FeiniuBus.LinqBuilder\FeiniuBus.LinqBuilder.csproj" />
     <ProjectReference Include="..\..\src\FeiniuBus.SqlBuilder\FeiniuBus.SqlBuilder.csproj" />

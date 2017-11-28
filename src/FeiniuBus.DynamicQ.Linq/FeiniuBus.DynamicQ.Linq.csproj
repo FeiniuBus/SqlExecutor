@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="LinqContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FeiniuBus.AspNetCore.Json" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FeiniuBus.DynamicQ.Core\FeiniuBus.DynamicQ.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.SqlExecutor", "src\FeiniuBus.SqlExecutor\FeiniuBus.SqlExecutor.csproj", "{4EF656D2-83E4-4B76-A0EC-1A22B12A4E69}"
 EndProject
@@ -27,7 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeiniuBus.LinqBuilder", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{6C8F7CE1-8A1E-499D-9C9F-F35ACF5BD947}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feiniubus.DynamicQuery.Sample", "sample\Feiniubus.DynamicQuery.Sample\Feiniubus.DynamicQuery.Sample.csproj", "{AB0A61E0-D787-479F-B629-36A661929FCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feiniubus.DynamicQuery.Sample", "sample\Feiniubus.DynamicQuery.Sample\Feiniubus.DynamicQuery.Sample.csproj", "{AB0A61E0-D787-479F-B629-36A661929FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeiniuBus.DynamicQ.Core", "FeiniuBus.DynamicQ.Core\FeiniuBus.DynamicQ.Core.csproj", "{54933742-EDF4-4C8A-A4CB-62966752D304}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeiniuBus.DynamicQ.Linq", "src\FeiniuBus.DynamicQ.Linq\FeiniuBus.DynamicQ.Linq.csproj", "{8D8DD7BC-2BA8-4BB2-8B4A-39872ACCC679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,14 @@ Global
 		{AB0A61E0-D787-479F-B629-36A661929FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB0A61E0-D787-479F-B629-36A661929FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB0A61E0-D787-479F-B629-36A661929FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54933742-EDF4-4C8A-A4CB-62966752D304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54933742-EDF4-4C8A-A4CB-62966752D304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54933742-EDF4-4C8A-A4CB-62966752D304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54933742-EDF4-4C8A-A4CB-62966752D304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D8DD7BC-2BA8-4BB2-8B4A-39872ACCC679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D8DD7BC-2BA8-4BB2-8B4A-39872ACCC679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D8DD7BC-2BA8-4BB2-8B4A-39872ACCC679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D8DD7BC-2BA8-4BB2-8B4A-39872ACCC679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +102,8 @@ Global
 		{B3EAF6B5-9F35-4624-B84C-6C77801D605C} = {73CBEBAB-7DEC-4FEC-922D-519A82798609}
 		{1D5DA459-8C7F-4D5E-8F01-4EE7E4CD6423} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
 		{AB0A61E0-D787-479F-B629-36A661929FCF} = {6C8F7CE1-8A1E-499D-9C9F-F35ACF5BD947}
+		{54933742-EDF4-4C8A-A4CB-62966752D304} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
+		{8D8DD7BC-2BA8-4BB2-8B4A-39872ACCC679} = {F76093DA-EC55-42EB-88C1-3278738C6FD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E015856-572A-4ED3-ABE8-A6A7465DE26F}

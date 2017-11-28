@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FeiniuBus.Converter;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FeiniuBus.SqlBuilder.Mysql

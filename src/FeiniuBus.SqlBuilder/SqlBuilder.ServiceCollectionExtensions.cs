@@ -1,5 +1,6 @@
 ﻿using System;
 using FeiniuBus;
+using FeiniuBus.Converter;
 using FeiniuBus.SqlBuilder;
 
 namespace Microsoft.Extensions.DependencyInjection
