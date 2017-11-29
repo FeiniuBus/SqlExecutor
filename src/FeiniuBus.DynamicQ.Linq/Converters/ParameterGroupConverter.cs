@@ -53,7 +53,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
                 {
                     var converter = _operationConverters.FirstOrDefault(x =>
                         x.CanConvert(ClientTypes.EntityFramework, entityType, p.Field, p.Value, p.Operator,
-                            p.GetPropertyInfo(entityType, _propertyAccessor), group.Relation).ThrowIfCouldNotConvert());
+                            p.GetPropertyInfo(entityType, _propertyAccessor), SimplyQueryRelations(group.Relation)).ThrowIfCouldNotConvert());
                     if (converter == null)
                         throw new Exception(
                             $"Converter of '{p.Operator}' for {ClientTypes.EntityFramework} not found.");
@@ -64,7 +64,7 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
                     }
 
                     converter.Convert(entityType, _context.Parameters.NextParameterName(), p.Field, p.Value, p.Operator,
-                        p.GetPropertyInfo(entityType, _propertyAccessor), group.Relation);
+                        p.GetPropertyInfo(entityType, _propertyAccessor), SimplyQueryRelations(group.Relation));
                 }
 
                 _context.Parameters.Statement.Append(relationConverter.GetSuffix(entityType, relation,
@@ -75,6 +75,12 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
                 foreach (var child in group.ChildGroups)
                     Recur(entityType, child, child.Relation);
             }
+        }
+
+        public QueryRelations SimplyQueryRelations(QueryRelations relation)
+        {
+            if(relation == QueryRelations.AndNot) return QueryRelations.And;
+            return relation == QueryRelations.OrNot ? QueryRelations.Or : relation;
         }
     }
 }
