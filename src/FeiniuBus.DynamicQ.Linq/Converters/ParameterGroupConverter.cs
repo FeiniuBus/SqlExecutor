@@ -38,16 +38,26 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
 
         public void Recur(Type entityType, DynamicQueryParamGroup group, QueryRelations relation)
         {
+            var relationConverter = _relationConverters.FirstOrDefault(x =>
+                x.CanConvert(ClientTypes.EntityFramework, entityType, relation).ThrowIfCouldNotConvert());
+            if (relationConverter == null)
+                throw new Exception(
+                    $"Converter of '{relation}' for {ClientTypes.EntityFramework} not found.");
+            _context.Parameters.Statement.Append(relationConverter.GetPrefix(entityType, relation,
+                _context.Parameters.CurrentIndex()));
+
             if (group.IsParam())
             {
-                var relationConverter = _relationConverters.FirstOrDefault(x =>
-                    x.CanConvert(ClientTypes.EntityFramework, entityType, relation).ThrowIfCouldNotConvert());
-                if (relationConverter == null)
-                    throw new Exception(
-                        $"Converter of '{relation}' for {ClientTypes.EntityFramework} not found.");
+                IRelationConverter notRelationConverter = null;
 
-                _context.Parameters.Statement.Append(relationConverter.GetPrefix(entityType, relation,
-                    _context.Parameters.CurrentIndex()));
+                if (group.Relation == QueryRelations.AndNot || group.Relation == QueryRelations.OrNot)
+                {
+                    notRelationConverter = _relationConverters.FirstOrDefault(x =>
+                        x.CanConvert(ClientTypes.EntityFramework, entityType, relation).ThrowIfCouldNotConvert());
+
+                    _context.Parameters.Statement.Append(notRelationConverter.GetPrefix(entityType, relation,
+                        _context.Parameters.CurrentIndex()));
+                }
 
                 foreach (var p in group.Params)
                 {
@@ -67,14 +77,19 @@ namespace FeiniuBus.DynamicQ.Linq.Converters
                         p.GetPropertyInfo(entityType, _propertyAccessor), SimplyQueryRelations(group.Relation));
                 }
 
-                _context.Parameters.Statement.Append(relationConverter.GetSuffix(entityType, relation,
-                    _context.Parameters.CurrentIndex()));
+                if (notRelationConverter != null)
+                {
+                    _context.Parameters.Statement.Append(notRelationConverter.GetSuffix(entityType, relation,
+                        _context.Parameters.CurrentIndex()));
+                }
             }
             else
             {
                 foreach (var child in group.ChildGroups)
-                    Recur(entityType, child, child.Relation);
+                    Recur(entityType, child, group.Relation);
             }
+            _context.Parameters.Statement.Append(relationConverter.GetSuffix(entityType, relation,
+                _context.Parameters.CurrentIndex()));
         }
 
         public QueryRelations SimplyQueryRelations(QueryRelations relation)
